@@ -42,10 +42,9 @@ public with sharing class ClassesObjectsMethods {
         // Initialize a String with 'Hello, Salesforce!'
         String s = 'Hello, Salesforce!';
         // Get the length of the String
-        Integer stringLength = s.length();    
+        Integer stringLength = s.length();
         // Get a substring of the String of the first 5 characters
         String subString = s.left(5);
-        subString = s.substring(0,5);
         // Convert the String to lower case
         String lowerCaseString = s.toLowerCase();
         
@@ -114,9 +113,10 @@ public with sharing class ClassesObjectsMethods {
         Integer result = 0;
 
         for(Integer i = 0; i < str.length(); i++){
-            if(str.substring(i,i+1).equalsIgnoreCase('a')
-            || str.substring(i,i+1).equalsIgnoreCase('e') || str.substring(i,i+1).equalsIgnoreCase('i')
-            || str.substring(i,i+1).equalsIgnoreCase('o') || str.substring(i,i+1).equalsIgnoreCase('u')){
+            String ch = str.substring(i, i+1).toLowerCase();
+            if(ch.equalsIgnoreCase('a')
+            || ch.equalsIgnoreCase('e') || ch.equalsIgnoreCase('i')
+            || ch.equalsIgnoreCase('o') || ch.equalsIgnoreCase('u')){
                 result++;
             }
         }
@@ -304,7 +304,7 @@ public with sharing class ClassesObjectsMethods {
         // Add the book to the list
         books.add(myBook1);
         books.add(myBook2);
-        return books; // Replace null with the variable you used to store the result      
+        return books; // Replace null with the variable you used to store the result    
     }
 
 
@@ -319,7 +319,17 @@ public with sharing class ClassesObjectsMethods {
         // Declare private two instance variables - (TEXT) name and (Number) age
         private String name;
         private Integer age;
+        //No-argument constructor
+        public Person() {
+            this.name = '';
+            this.age = 0;
+        }
         // Constructor to initialize the name and age
+        /**
+         * @param name The name of the person.
+         * @param age The age of the person.
+         * @return A new instance of the Person class.
+        */
         public Person(String name, Integer age) {
             this.name = name;
             this.age = age;
@@ -327,8 +337,11 @@ public with sharing class ClassesObjectsMethods {
         // Method introduceYourself that returns the details of the person        
         // Return a string in the format "Hello, my name is <name> and I am <age> years old."
         // For example, introduceYourself() should return a string like "Hello, my name is John Doe and I am 28 years old."
+        /**
+         * @return A string containing the details of the person.
+        */
         public String introduceYourself(){
-            return 'Hello, my name is ' + this.name + ' and I am ' + this.age + ' years old.';  
+            return 'Hello, my name is ' + this.name + ' and I am ' + this.age + ' years old.';
         }
         // Getter method that returns the name of the person
         public String getName(){
@@ -345,7 +358,7 @@ public with sharing class ClassesObjectsMethods {
         // Setter method that sets the age of the person
         public void setAge(Integer age){
             this.age = age;
-        }   
+        }
     }
 
     /**
@@ -417,6 +430,6 @@ public with sharing class ClassesObjectsMethods {
      * @return The Person object of the older person.
      */
     public static Person getOlderPerson(Person person1, Person person2) {
-        return person1.age > person2.age ? person1 : (person1.age < person2.age ? person2 : person1); // Replace null with the variable you used to store the result
+        return person1.age >= person2.age ? person1 : person2; // Replace null with the variable you used to store the result
     }
 }
